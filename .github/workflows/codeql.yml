@@ -61,8 +61,8 @@ jobs:
         #queries: security-experimental
 
         # field audit query
-        #queries: advanced-security/codeql-queries/python/suites/codeql-python-audit.qls@main
-        queries: advanced-security/codeql-python:suites/codeql-python-audit.qls
+        queries: advanced-security/codeql-queries/python/suites/codeql-python-audit.qls@main
+        #queries: advanced-security/codeql-python:suites/codeql-python-audit.qls
         #queries: advanced-security/codeql-python:CWE-089/SqlInjectionHeuristic.ql
         
         # standard packs, extensions, and extra packs
