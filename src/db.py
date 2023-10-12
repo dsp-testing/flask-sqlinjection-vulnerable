@@ -9,7 +9,6 @@ logger = logging.getLogger(__name__)
 
 DB_FILENAME = os.path.realpath("data/test.db")
 
-
 def _get_connection() -> sqlite3.Connection:
     try:
         conn = sqlite3.connect(DB_FILENAME)
