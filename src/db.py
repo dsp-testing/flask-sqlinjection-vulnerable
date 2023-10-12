@@ -1,4 +1,3 @@
-import contextlib
 import logging
 import os
 import sqlite3
@@ -20,19 +19,6 @@ def _get_connection() -> sqlite3.Connection:
     else:
         return conn
 
-
-@contextlib.contextmanager
-def connection_context():
-    conn = _get_connection()
-    cur = conn.cursor()
-
-    yield cur
-
-    conn.commit()
-    cur.close()
-    conn.close()
-
-
 def get_challenges_for_candidate(cpf: str) -> List[Any]:
     query = f"""
         SELECT title, score FROM challenges c
@@ -44,8 +30,13 @@ def get_challenges_for_candidate(cpf: str) -> List[Any]:
     print(f"[bold]Executing query:[/bold] [green]{query}[/green]")
     print(f"[bold]{'-' * 50}[/bold]")
 
-    with connection_context() as cur:
-        cur.execute(query)
-        results = cur.fetchall()
+    conn = _get_connection()
+    cur = conn.cursor()
 
-        return results
+    cur.execute(query)
+    results = cur.fetchall()
+
+    cur.close()
+    conn.close()
+
+    return results
